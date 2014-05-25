@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Digi Clock | Arif Reza</title>
+<style type="text/css">
+body {
+	background:url('bg.png');
+}
+.canvas {
+	margin: auto;
+	border:5px solid #68583F;
+	background:#1D1F1A;
+	width:240px;
+	height:auto;
+	min-height:230px;
+	color:white;
+	padding:30px;
+	font-size:24px;
+	word-spacing: 13px;
+}
+default, half, ten, quarter, twenty, five, minutes, to, past, one, three, two, four, fiveh, six, seven, eight, nine, tenh, eleven, twelve, oclock {
+	color:#5C5C5C;
+	text-shadow:0px 0px 10px #5C5C5C;
+}
+default {
+	color:white;
+	text-shadow:0px 0px 10px #fff;
+}
+</style>
+</head>
+<body>
+<div class="canvas">
+<line one><default>IT IS</default> <half> HALF </half> <ten> TEN </ten></line><br />
+<line two><quarter>QUARTER</quarter> <twenty> TWENTY </twenty></line><br />
+<line three><five> FIVE </five> <minutes> MINUTES </minutes> <to> TO </to></line><br />
+<line four><past> PAST </past> <one> ONE </one> <three> THREE </three></line><br />
+<line five><two> TWO </two> <four> FOUR </four> <fiveh> FIVE </fiveh></line><br />
+<line six><six> SIX </six> <seven> SEVEN </seven> <eight> EIGHT </eight></line><br />
+<line seven><nine> NINE </nine> <tenh> TEN </tenh> <eleven> ELEVEN </eleven> </line><br />
+<line eight><twelve> TWELVE </twelve> <oclock> O'CLOCK </oclock></line><br />
+</div>
+<script type="text/javascript">
+function show(){
+	var tags = ["half", "ten", "quarter", "twenty", "five", "minutes", "to", "past", "one", "three", "two", "four", "fiveh", "six", "seven", "eight", "nine", "tenh", "eleven", "twelve"];
+	for (i=0; i<tags.length;i++){
+		tag=tags[i];
+		tag = tag+"";
+		document.getElementsByTagName(tag)[0].style.color="#5C5C5C";
+	}
+	//Let's get the Date and Time
+	var today=new Date();
+	var h=today.getHours(); //Get the Hour
+	var word;
+	var word2=word;
+	//Change all 24 hours time formte to 12 hours formate
+	if (h>=12){
+		h-=12;
+	}
+
+	var m=today.getMinutes(); //Get the Minute
+
+	//Check for key either to use "To" or "Past"
+	if (m<=30){
+		h=h;
+		var key="past";
+		m=m;
+	}
+	else{
+		h+=1;
+		var key="to";
+		m=60-m;
+	}
+
+	//Which Keyword to use before To/Past
+	if (m>=0 && m<=6){
+		word = "five";
+	}
+	else if (m>=7 && m<=12){
+		word = "ten";
+	}
+	else if (m>=13 && m<=18){
+		word = "quarter";
+	}
+	else if (m>=19 && m<=25){
+		word = "twenty";
+	}
+	else if (m>=26 && m<=30){
+		word = "half";
+	}
+
+	if (word2!=null){alert(word2);}
+	document.getElementsByTagName(word)[0].style.color="white";
+	document.getElementsByTagName(key)[0].style.color="white";
+	if (word=="five" || word=="ten" || word=="twenty"){
+		document.getElementsByTagName('minutes')[0].style.color="white";
+	}
+	else {
+		document.getElementsByTagName('minutes')[0].style.color="#5C5C5C";
+	}
+	switch (h) {
+	case 1:
+		hour = "one";
+		break;
+	case 2:
+	    hour = "two";
+	    break;
+	case 3:
+		hour = "three";
+	    break;
+	case 4:
+		hour = "four";
+	    break;
+	case 5:
+		hour = "fiveh";
+	    break;
+	case 6:
+		hour = "six";
+	    break;
+	case 7:
+		hour = "seven";
+	    break;
+	case 8:
+		hour = "eight";
+	    break;
+	case 9:
+		hour = "nine";
+	    break;
+	case 10:
+		hour = "tenh";
+	    break;
+	case 11:
+		hour = "eleven";
+	    break;
+	case 12:
+		hour = "twelve";
+	    break;
+	}
+	document.getElementsByTagName(hour)[0].style.color="white";
+
+	if (m==0){
+		document.getElementsByTagName(oclock)[0].style.color="white";
+	}
+	var t = setTimeout(function(){show()},10000);
+}
+show();
+</script>
+</body>
+</html>
